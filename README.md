@@ -2,8 +2,8 @@
 
 Camada **cliente** da arquitetura Cliente-Servidor da livraria, publicada separadamente do back-end.
 
-- **Front-end publicado:** {{FRONT_URL}}
-- **Back-end (API REST):** {{BACK_URL}} · repositório [livraria-backend-exercicio-8-6](https://github.com/HenriqueRSouza/livraria-backend-exercicio-8-6)
+- **Front-end publicado:** endereço do Azure Static Web Apps *(após o deploy)*
+- **Back-end (API REST):** https://engsoft-lab86-backend.azurewebsites.net *(após o deploy)* · repositório [livraria-backend-exercicio-8-6](https://github.com/HenriqueRSouza/livraria-backend-exercicio-8-6)
 - Diagrama da arquitetura: [board do Miro](https://miro.com/app/board/uXjVETAfWIY=/)
 
 ```
