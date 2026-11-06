@@ -1,0 +1,36 @@
+# Testa o front-end e publica no Azure App Service (Node) a cada push na main.
+name: Testes e deploy do front-end
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm test
+
+  deploy:
+    needs: testes
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    env:
+      PERFIL: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+    steps:
+      - if: env.PERFIL == ''
+        run: echo "::notice::Secret AZURE_WEBAPP_PUBLISH_PROFILE ainda não configurado; deploy pulado."
+      - uses: actions/checkout@v4
+        if: env.PERFIL != ''
+      - uses: azure/webapps-deploy@v3
+        if: env.PERFIL != ''
+        with:
+          app-name: engsoft-lab86-frontend
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
